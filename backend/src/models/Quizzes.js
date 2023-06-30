@@ -18,8 +18,13 @@ const QuizzSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
     required: true
+  },
+  noOfQuestions: {
+    type: Number,
+    required: true
   }
 });
 
 const QuizzModel = mongoose.model("quizzes", QuizzSchema);
 export default QuizzModel;
+
