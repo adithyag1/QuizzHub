@@ -1,7 +1,7 @@
 import UserModel from "./models/Users.js";
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb+srv://adithyagmoorthy:dabidaye1710@quizzes.uncnis1.mongodb.net/quizzes", {
+mongoose.connect(`mongodb+srv://adithyagmoorthy:${process.env.MONGODB_PASSWORD}@quizzes.uncnis1.mongodb.net/quizzes`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(async () => {

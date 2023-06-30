@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
-const QuizSchema = new mongoose.Schema({
+const QuizzSchema = new mongoose.Schema({
   quiz: [
     {
+      questionNo: Number,
       question: String,
       options: [
         {
@@ -20,5 +21,5 @@ const QuizSchema = new mongoose.Schema({
   }
 });
 
-const QuizModel = mongoose.model("quiz", QuizSchema);
-export default QuizModel;
+const QuizzModel = mongoose.model("quizzes", QuizzSchema);
+export default QuizzModel;
