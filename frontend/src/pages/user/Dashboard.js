@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Navbar from '../../components/Navbar.js'
+import { AuthContext } from '../../context/AuthContext.js';
+import CreatedQuizzes from '../../components/CreatedQuizzes.js';
 
 function Dashboard() {
     const [active, setActive]= useState(1);
+    const {activeUsername}= useContext(AuthContext);
   return (
     <>
     <Navbar/>
@@ -12,9 +15,7 @@ function Dashboard() {
     </div>
     {
         active===1 ? (
-            <div>
-                num1
-            </div>
+            (<CreatedQuizzes username={activeUsername}/>)
         ):(
             <div>
                 num2

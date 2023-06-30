@@ -30,7 +30,8 @@ router.post("/login", async (req, res) => {
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
-        res.json({ username: user.username, message: "Logged in successfully!" });
+        res.json({ username: user.username, userId: user.id, message: "Logged in successfully!" });
+        //console.log('user: ', res.json)
       } else {
         res.json({ username: null, message: "Incorrect password" });
       }
