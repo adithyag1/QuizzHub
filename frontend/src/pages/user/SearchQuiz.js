@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar.js'
 import CreatedQuizzes from '../../components/CreatedQuizzes.js';
 
 function SearchQuiz() {
-    const [searchedUser, setSearchedUser]= useState('tej');
+    const [searchedUser, setSearchedUser]= useState('adithyag');
   return (
     <div>
         <Navbar/>

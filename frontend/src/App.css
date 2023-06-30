@@ -3,6 +3,7 @@
 }
 .App {
   text-align: center;
+  box-sizing: border-box;
 }
 
 .background-login-register{
@@ -93,4 +94,18 @@
 }
 .option-label{
   margin-right: 3.5vw;
+}
+.quiz-list-box{
+  display: flex;
+  flex-direction: column;
+  border: 2px aqua solid;
+  margin-bottom: 25px;
+  margin-right: 50vw;
+  padding: 8px;
+  cursor: pointer;
+}
+.quiz-list-box-header{
+  display: flex;
+  justify-content: space-between;
+
 }

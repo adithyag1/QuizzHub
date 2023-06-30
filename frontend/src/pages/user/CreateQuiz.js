@@ -4,6 +4,7 @@ function CreateQuiz() {
     const [currentOption, setCurrentOption] = useState(1);
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [questions, setQuestions] = useState([{ question: '', options: [] }]);
+    const [creator, setCreator]= useState('adithyag'); //to be removed later.
 
     const handleAddOption = () => {
         setQuestions((prevQuestions) => {
@@ -44,7 +45,7 @@ function CreateQuiz() {
             {questions.map((questionObj, index) => (
                 <div className='div1' key={index}>
                     <div className='questions-create-quiz'>
-                        <div className='question-label'>{`Question ${index + 1}:`} </div>
+                        <div className='question-label'>{ `Question ${index + 1}:`} </div>
                         <textarea
                             name={`question-${index}`}
                             rows={8}
@@ -64,6 +65,7 @@ function CreateQuiz() {
                 </div>
             ))}
             <button onClick={handleAddQuestion}>Add Question</button>
+            <button>Finish Quiz</button>
         </div>
     );
 }

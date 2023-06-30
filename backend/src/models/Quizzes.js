@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const QuizzSchema = new mongoose.Schema({
+  quizName: {
+    type: String,
+    required: true
+  },
   quiz: [
     {
       questionNo: Number,

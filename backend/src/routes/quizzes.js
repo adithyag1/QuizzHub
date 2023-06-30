@@ -7,35 +7,23 @@ const router= express.Router();
 router.post("/getquizlist", async(req,res)=>{
     const {username}= req.body;
     try{
-        await UserModel.findOne({username}).then(async(user)=>{
-            if(user)
-            {
-                const userId= user.id;
-                await QuizzModel.find({creator: userId}).then((quiz)=>{
-                    if(quiz.length>0){
-                        
-                        res.json({quiz});
-                    }
-                    else{
-                        res.json({message: "No quizzes yet!"})
-                    }
-                    
-                }).catch((err)=>{
-                    res.json(err);
-                })
+        const user = await UserModel.findOne({username});
+        if (user) {
+            const userId = user._id;
+            const quizzes = await QuizzModel.find({creator: userId}).select('_id noOfQuestions quizName creator');
+            if (quizzes.length > 0) {
+                res.json({quiz: quizzes, message: "Successfully fetched!"});
+            } else {
+                res.json({message: "No quizzes yet!"});
             }
-            else{
-                res.json({message: "User doesn't exist!"})
-            }
-            
-        }).catch((err)=>{
-            res.json(err)
-        })
-    }
-    catch (err){
+        } else {
+            res.json({message: "User doesn't exist!"});
+        }
+    } catch (err) {
         res.json(err);
     }
 });
+
 
 router.post("/createquiz", async(req,res)=>{
     const newQuizz= new QuizzModel(req.body)
