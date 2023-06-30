@@ -117,3 +117,6 @@
 .navbar-element{
   margin-left: 5vw;
 }
+.register{
+  cursor: pointer;
+}

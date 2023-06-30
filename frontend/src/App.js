@@ -7,6 +7,7 @@ import TakeQuiz from './pages/user/TakeQuiz.js';
 import SearchQuiz from './pages/user/SearchQuiz.js';
 import { useState } from 'react';
 import { AuthContext } from './context/AuthContext.js';
+import ViewQuiz from './pages/user/ViewQuiz.js';
 
 function App() {
   const [activeUsername, setActiveUsername] = useState(null);
@@ -21,6 +22,7 @@ function App() {
             <Route path='/createquiz' element={<CreateQuiz />} />
             <Route path='/takequiz' element={<TakeQuiz />} />
             <Route path='/searchquiz' element={<SearchQuiz />} />
+            <Route path='/viewquiz/:quizid' element={<ViewQuiz/>}/>
           </Routes>
         </AuthContext.Provider>
       </BrowserRouter>

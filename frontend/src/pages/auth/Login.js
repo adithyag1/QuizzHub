@@ -10,6 +10,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate= useNavigate();
+  const [register, setRegister]= useState(false);
 
   useEffect(() => {
     if(activeUsername!== null)
@@ -27,12 +28,19 @@ function Login() {
         username: currentUsername,
         password: password
       });
-      const { username, userId, message } = response.data;
-      if (username) {
+      const {status, username, userId, message } = response.data;
+      if (status===1) {
         setActiveUsername(username);
         setActiveUserId(userId);
-      } else {
-        console.log('message:', message);
+      } else if(status===0) {
+        alert(message);
+      }
+      else if(status===2){
+        setRegister(true);
+        alert(message);
+      }
+      else{
+        console.log('response: ', response);
       }
     } catch (err) {
       console.log(err);
@@ -41,11 +49,38 @@ function Login() {
     }
   };
 
+  const createNewUser= async()=>{
+    try{
+      setIsLoading(true);
+      const response= await axios.post('http://localhost:3001/auth/register',{
+        username: currentUsername,
+        password: password
+      });
+      const {status, username, userId, message } = response.data;
+      if (status===1) {
+        setActiveUsername(username);
+        setActiveUserId(userId);
+      } else if(status===0) {
+        alert(message);
+      }
+      else{
+        console.log('response: ', response);
+      }
+
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
   const handleLogin = () => {
     if (currentUsername === '' || password === '') {
       alert('Please fill in the username and password.');
-    } else {
+    } else if(!register) {
       fetchUserDetails();
+    }
+    else{
+      createNewUser();
     }
   };
 
@@ -55,7 +90,7 @@ function Login() {
         Welcome to <div className='quizzhub-title'>QuizzHub</div>
       </div>
       <div className='login-form'>
-        <div className='login-header'>Login</div>
+        <div className='login-header'>{register? `Register` : `Login`}</div>
         <input
           type='text'
           className='text-box-plain'
@@ -73,11 +108,16 @@ function Login() {
           }}
         />
         <button className='login-button' onClick={handleLogin} disabled={isLoading}>
-          {isLoading ? 'Logging In...' : 'Login'}
+          {register ? isLoading ? 'Creating user...': 'Register': isLoading ? 'Logging In...' : 'Login'}
         </button>
-        <div className='login-footer-statement'>
-          Don't have an account? <a href='/register'>Register</a>
-        </div>
+        
+          {register
+          ?(<div className='login-footer-statement'>Already have an account? <u className='register' onClick={()=>{setRegister(false)}}>Login</u> </div>) 
+          :(<div className='login-footer-statement'>Don't have an account? <u className='register' onClick={()=>{setRegister(true)}}>Register</u> </div>)
+          
+          }
+          
+       
       </div>
     </div>
   );

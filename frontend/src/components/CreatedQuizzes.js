@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function CreatedQuizzes(props) {
   const [quizList, setQuizList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -25,19 +27,27 @@ function CreatedQuizzes(props) {
     }
   };
 
+  const handleQuizClick = (quizId) => {
+    navigate(`/viewquiz/${quizId}`);
+  };
+
   return (
     <div>
       <h2>Created Quizzes</h2>
       {quizList.length > 0 ? (
         <ul>
           {quizList.map((quiz) => (
-            <div className='quiz-list-box' key={quiz._id}>
+            <div
+              className='quiz-list-box'
+              key={quiz._id}
+              onClick={() => handleQuizClick(quiz._id)}
+            >
               <div className='quiz-list-box-header'>
                 <h3>{quiz.quizName}</h3>
                 <p>Creator: {props.username}</p>
               </div>
               <p>No. of Questions: {quiz.noOfQuestions}</p>
-              </div>
+            </div>
           ))}
         </ul>
       ) : (
@@ -48,3 +58,4 @@ function CreatedQuizzes(props) {
 }
 
 export default CreatedQuizzes;
+

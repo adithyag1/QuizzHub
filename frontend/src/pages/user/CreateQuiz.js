@@ -1,11 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext.js';
 import axios from 'axios';
+import Navbar from '../../components/Navbar.js';
+import { useNavigate } from 'react-router-dom';
 
 function CreateQuiz() {
   const [currentOption, setCurrentOption] = useState(1);
   const [currentQuestion, setCurrentQuestion] = useState(1);
-  const {activeUserId}= useContext(AuthContext)
+  const {activeUserId}= useContext(AuthContext);
+  const [loading, setLoading]= useState(false);
+  const [quizName, setQuizName]= useState('');
   const [questions, setQuestions] = useState([
     {
       questionNo: 1,
@@ -14,27 +18,27 @@ function CreateQuiz() {
       correctOption: 1,
     },
   ]);
+  const navigate= useNavigate();
 
   const handleAddOption = () => {
     setQuestions((prevQuestions) => {
       const updatedQuestions = [...prevQuestions];
-      //console.log('updated questions before: ', updatedQuestions);
       const currentQuestionIndex = currentQuestion - 1;
-      //console.log('current index' : currentQuestionIndex);
       const currentQuestionObj = updatedQuestions[currentQuestionIndex];
       const updatedOptions = [
         ...currentQuestionObj.options,
         { optionNo: currentQuestionObj.options.length + 1, option: '' },
       ];
-      //console.log('updated Options: ', updatedOptions);
       updatedQuestions[currentQuestionIndex] = {
         ...currentQuestionObj,
         options: updatedOptions,
       };
-      //console.log('updated questions after: ', updatedQuestions);
       return updatedQuestions;
     });
   };
+  
+  
+  
   
 
   const handleAddQuestion = () => {
@@ -94,15 +98,40 @@ function CreateQuiz() {
       return updatedQuestions;
     });
   };
-  const sendData= ()=>{
-
+  const sendData= async()=>{
+    try{
+      setLoading(true);
+      const response= await axios.post('http://localhost:3001/quizz/createquiz',{
+        quizName: quizName,
+        quiz: questions,
+        creator: activeUserId,
+        noOfQuestions: questions.length
+      });
+      const {quizname, message}= response.data;
+      if(quizname!==''){
+        alert(message);
+      }
+      else{
+        console.log('error in creating quiz: ',response);
+      }
+    }
+    catch(err){
+      console.log('error: ',err)
+    }
+    finally{
+      setLoading(false);
+    }
   }
   const handleFinishQuiz = () => {
-    console.log(questions);
+    sendData().then(() => {
+      navigate('/dashboard');
+    });
   };
 
   return (
     <div>
+      <Navbar/>
+      <input type='text' placeholder='Quiz Name' onChange={(e)=>{setQuizName(e.target.value)}}/>
       {questions.map((questionObj, questionIndex) => (
         <div className='div1' key={questionIndex}>
           <div className='questions-create-quiz'>
@@ -141,7 +170,7 @@ function CreateQuiz() {
         </div>
       ))}
       <button onClick={handleAddQuestion}>Add Question</button>
-      <button onClick={handleFinishQuiz}>Finish Quiz</button>
+      <button onClick={handleFinishQuiz} disabled={loading}>{loading?`Uploading quiz...`: `Finish Quiz`}</button>
     </div>
   );
 }

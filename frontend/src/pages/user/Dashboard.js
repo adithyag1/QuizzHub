@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar.js'
 import { AuthContext } from '../../context/AuthContext.js';
 import CreatedQuizzes from '../../components/CreatedQuizzes.js';
@@ -6,6 +6,9 @@ import CreatedQuizzes from '../../components/CreatedQuizzes.js';
 function Dashboard() {
     const [active, setActive]= useState(1);
     const {activeUsername}= useContext(AuthContext);
+    useEffect(()=>{
+        console.log('Active User name: ',activeUsername);
+    })
   return (
     <>
     <Navbar/>
