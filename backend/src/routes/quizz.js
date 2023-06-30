@@ -1,8 +1,7 @@
-import QuizModel from "../models/Quizz";
+import QuizModel from "../models/Quizz.js";
 import express from 'express';
 import mongoose from "mongoose";
 
 const router= express.Router();
 
-router.get("/", async)
 export {router as quizzRouter}
