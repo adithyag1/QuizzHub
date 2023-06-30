@@ -1,0 +1,96 @@
+*{
+  box-sizing: border-box;
+}
+.App {
+  text-align: center;
+}
+
+.background-login-register{
+  background-color: aqua;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+.welcome-statement{
+  align-self: center;
+  color: #000000;
+  font-size: 60px;
+}
+.quizzhub-title{
+  color: #000000;
+  font-size: 90px;
+}
+.login-header {
+  color: #000000;
+  font-weight: 700;
+  font-size: 40px;
+  margin-bottom: 3.47vh;
+}
+.login-form {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-button {
+  border: none;
+  height: 8.19vh;
+  width: 29.21vw;
+  font-weight: 400;
+  font-size: 24px;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+
+.text-box-plain {
+  height: 8.19vh;
+  width: 29.21vw;
+  margin-bottom: 3.19vh;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  padding-left: 50px;
+  background-color: #ffffff;
+}
+.login-footer-statement {
+  margin-top: 1.8vh;
+  align-self: flex-end;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+}
+
+.login-footer-statement-register {
+  color: #000000;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.dashboard-navigate{
+  display: flex;
+  justify-content: space-around;
+
+}
+.div1{
+ margin: 10vh 5vw;
+
+}
+.questions-create-quiz{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5vh;
+}
+.question-label{
+  margin-right: 2vw;
+}
+.options-create-quiz{
+  display: flex;
+  margin-bottom: 2.5vh;
+}
+.option-label{
+  margin-right: 3.5vw;
+}
