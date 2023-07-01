@@ -31,18 +31,21 @@ function ViewQuiz() {
   return (
     <div>
       <Navbar />
+      <div className='view-quiz-container'>
       {quizName !== '' && <h2>{quizName}</h2>}
       {questionList.length > 0 && (
-        <div>
+        <div >
           {questionList.map((question, index) => (
-            <div key={index}>
-              <h3>Q{question.questionNo}. </h3>
-              <p>{question.question}</p>
+            <div className='view-quiz-question' key={index}>
+              <div className='view-quiz-question-header'>
+              <p className='view-quiz-header-element'>Q{question.questionNo}. </p>
+              <p className='view-quiz-header-element'>{question.question}</p>
+              </div>
               <div>
                 {question.options.map((option, optionIndex) => (
                   <div key={optionIndex}>
                     {option.optionNumber}. {option.option}
-                    {option.optionNumber === question.correctOption && <strong> (Correct Option)</strong>}
+                    {option.optionNumber === question.correctOption && <span className='view-quiz-header-element'> (Correct Option)</span>}
                   </div>
                 ))}
               </div>
@@ -51,6 +54,7 @@ function ViewQuiz() {
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 }

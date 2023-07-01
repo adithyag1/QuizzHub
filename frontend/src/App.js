@@ -13,7 +13,7 @@ function App() {
   const [activeUsername, setActiveUsername] = useState(null);
   const [activeUserId, setActiveUserId] = useState(null);
   return (
-    <>
+    <div className='App'>
       <BrowserRouter>
         <AuthContext.Provider value={{ activeUsername, setActiveUsername, activeUserId, setActiveUserId }}>
           <Routes>
@@ -26,7 +26,7 @@ function App() {
           </Routes>
         </AuthContext.Provider>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

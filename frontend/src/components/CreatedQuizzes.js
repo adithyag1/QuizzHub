@@ -66,8 +66,7 @@ function CreatedQuizzes(props) {
   
 
   return (
-    <div>
-      <h2>Created Quizzes</h2>
+    <div className='created-quizzes-container'>
       {quizList.length > 0 ? (
         <ul>
           {quizList.map((quiz) => (

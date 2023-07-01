@@ -137,23 +137,25 @@ function CreateQuiz() {
   return (
     <div>
       <Navbar/>
-      <input type='text' placeholder='Quiz Name' onChange={(e)=>{setQuizName(e.target.value)}}/>
+      <div className='view-quiz-container'>
+      <input className='text-box-plain' type='text' placeholder='Quiz Name' onChange={(e)=>{setQuizName(e.target.value)}}/>
       {questions.map((questionObj, questionIndex) => (
-        <div className='div1' key={questionIndex}>
-          <div className='questions-create-quiz'>
-            <div className='question-label'>{`Question ${questionIndex + 1}:`} </div>
-            <textarea
+        <div className='one-question' key={questionIndex}>
+          <div className='question-header-create-quiz'>
+            <div className='question-label'>{`Q${questionIndex + 1}.`} </div>
+            <textarea className='question-text-box'
               name={`question-${questionIndex}`}
-              rows={8}
-              cols={80}
+              rows={4}
+              cols={40}
               value={questionObj.question}
               onChange={handleQuestionChange}
             />
           </div>
           {questionObj.options.map((optionObj, optionIndex) => (
-            <div className='options-create-quiz' key={optionIndex}>
-              <div className='option-label'>{`Option ${optionObj.optionNumber}:`}</div>
+            <div className='question-header-create-quiz' key={optionIndex}>
+              <div className='option-label'>{`Option ${optionObj.optionNumber}.`}</div>
               <input
+                className='option-text-box'
                 type='text'
                 name={`option-${questionIndex}-${optionIndex}`}
                 value={optionObj.option}
@@ -161,7 +163,7 @@ function CreateQuiz() {
               />
             </div>
           ))}
-          <div className='correct-option'>
+          <div className='question-header-create-quiz'>
             <div className='option-label'>Correct Option:</div>
             <input
               type='number'
@@ -172,11 +174,15 @@ function CreateQuiz() {
               onChange={handleCorrectOptionChange}
             />
           </div>
-          <button onClick={handleAddOption}>Add Option</button>
+          <button className='create-quiz-button' onClick={handleAddOption}>Add Option</button>
         </div>
       ))}
-      <button onClick={handleAddQuestion}>Add Question</button>
-      <button onClick={handleFinishQuiz} disabled={loading}>{loading?`Uploading quiz...`: `Finish Quiz`}</button>
+      <button className='create-quiz-button' onClick={handleAddQuestion}>Add Question</button>
+      <div className='create-quiz-footer'>
+      <button className='create-quiz-button' onClick={handleFinishQuiz} disabled={loading}>{loading?`Uploading quiz...`: `Finish Quiz`}</button>
+      </div>
+      
+    </div>
     </div>
   );
 }

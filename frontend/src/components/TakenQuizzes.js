@@ -31,8 +31,7 @@ function TakenQuizzes() {
   };
 
   return (
-    <div>
-      <h2>Created Quizzes</h2>
+    <div className='created-quizzes-container'>
       {quizResultList.length > 0 ? (
         <ul>
           {quizResultList.map((quiz) => (

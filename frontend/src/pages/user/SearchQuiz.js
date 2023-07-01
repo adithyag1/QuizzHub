@@ -19,15 +19,15 @@ function SearchQuiz() {
   return (
     <div>
       <Navbar />
-      <div>
+      <div className='view-quiz-container'>
         <label>
-          <input type='text' placeholder='username' onChange={(e) => {
+          <input className='text-box-plain' type='text' placeholder='username' onChange={(e) => {
             setSearchedUser(e.target.value);
             setShowQuizList(false);
           }} />
-          <button onClick={handleSearch}>Search</button>
+          <button className='search-button' onClick={handleSearch}>Search</button>
         </label>
-      </div>
+      
       {showQuizList ? (
         !sameUser ? (
           <CreatedQuizzes username={searchedUser} />
@@ -37,6 +37,7 @@ function SearchQuiz() {
       ) : (
         <div></div>
       )}
+      </div>
 
     </div>
   );

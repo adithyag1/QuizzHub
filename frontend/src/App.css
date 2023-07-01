@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 .App {
-  text-align: center;
   box-sizing: border-box;
 }
 
@@ -51,7 +50,7 @@
   height: 8.19vh;
   width: 29.21vw;
   margin-bottom: 3.19vh;
-  border: none;
+  border: 1px black solid;
   border-radius: 10px;
   font-size: 20px;
   padding-left: 50px;
@@ -74,35 +73,18 @@
 .dashboard-navigate{
   display: flex;
   justify-content: space-around;
+  margin-bottom: 8vh;
 
 }
 
 .dashboard-navigate-element{
   cursor: pointer;
+  font-size: 24px;
 }
 .active{
   border-bottom: 2px black solid;
 }
 
-.div1{
- margin: 10vh 5vw;
-
-}
-.questions-create-quiz{
-  display: flex;
-  align-items: center;
-  margin-bottom: 5vh;
-}
-.question-label{
-  margin-right: 2vw;
-}
-.options-create-quiz{
-  display: flex;
-  margin-bottom: 2.5vh;
-}
-.option-label{
-  margin-right: 3.5vw;
-}
 .quiz-list-box{
   display: flex;
   flex-direction: column;
@@ -117,14 +99,108 @@
   justify-content: space-between;
 
 }
-.navbar{
-  display: flex ;
+.navbar {
+  background-color: aqua;
+  height: 6vh;
+  display: flex;
   justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 4vh;
+  padding: auto 2vw;
 }
+
 
 .navbar-element{
   margin-left: 5vw;
+  color: #000000;
+}
+.appname {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 30px;
+  margin-right: auto;
+  padding-left: 2vw;
+}
+.user{
+  color: #ffffff;
+  font-weight: 700;
+  padding-right: 2vw;
+}
+.navbar-link{
+  color: #000000;
+  text-decoration: none;
 }
 .register{
   cursor: pointer;
+}
+
+.view-quiz-container{
+  margin: auto 8vw;
+}
+.view-quiz-question-header{
+  display: flex;
+  align-items: center;
+
+}
+.view-quiz-header-element{
+  margin-right: 1vw;
+  font-weight: 600;
+}
+.view-quiz-question{
+  margin-bottom: 5vh;
+
+}
+.created-quizzes-container{
+  margin: auto 5vw;
+}
+.search-button{
+  margin-left: 4vw;
+  border: none;
+  height: 8vh;
+  width: 10vw;
+  font-weight: 300;
+  font-size: 20px;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+.question-text-box {
+  margin-bottom: 3.19vh;
+  border: 1px black solid;
+  border-radius: 10px;
+  font-size: 16px;
+  padding-left: 5px;
+  background-color: #ffffff;
+}
+.question-header-create-quiz{
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+.create-quiz-button{
+  border: none;
+  height: 6vh;
+  width: 8vw;
+  font-weight: 300;
+  font-size: 14px;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.option-text-box{
+    border: 1px black solid;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-left: 10px;
+    background-color: #ffffff;
+}
+.one-question{
+  margin-bottom: 5vh;
+}
+.create-quiz-footer{
+  margin-top: 5vh;
 }

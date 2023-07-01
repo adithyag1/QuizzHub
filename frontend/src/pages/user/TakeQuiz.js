@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom';
 
 function TakeQuiz() {
   const { quizid } = useParams();
-  const {activeUserId} = useContext(AuthContext);
+  const { activeUserId } = useContext(AuthContext);
   const [quizName, setQuizName] = useState('');
   const [questionList, setQuestionList] = useState([]);
   const [optionsMarked, setOptionsMarked] = useState([]);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     fetchQuiz();
   }, []);
@@ -87,47 +87,50 @@ function TakeQuiz() {
     console.log('options: ', optionsMarked);
 
     const score = calculateScores();
-    await addTakenQuiz(score).then(()=>{
+    await addTakenQuiz(score).then(() => {
       navigate('/dashboard');
     })
-      
+
   };
-  
+
 
   return (
     <div>
       <Navbar />
-      <h2>Taken Quizzes</h2>
-      {quizName !== '' && <h2>{quizName}</h2>}
-      {questionList.length > 0 && (
-        <div>
-          {questionList.map((question, index) => (
-            <div key={index}>
-              <h3>Q{question.questionNo}. </h3>
-              <p>{question.question}</p>
-              <div>
-                {question.options.map((option, optionIndex) => (
-                  <div key={optionIndex}>
-                    <label>
-                      <input
-                        type="radio"
-                        name={`question${index}`}
-                        value={optionIndex + 1}
-                        checked={optionsMarked[index] === optionIndex + 1}
-                        onChange={() => handleOptionChange(index, optionIndex)}
-                      />
+      <div className='view-quiz-container'>
+        {quizName !== '' && <h2>{quizName}</h2>}
+        {questionList.length > 0 && (
+          <div >
+            {questionList.map((question, index) => (
+              <div className='view-quiz-question' key={index}>
+                <div className='view-quiz-question-header'>
+                  <p className='view-quiz-header-element'>Q{question.questionNo}. </p>
+                  <p className='view-quiz-header-element'>{question.question}</p>
+                </div>
+                <div>
+                  {question.options.map((option, optionIndex) => (
+                    <div key={optionIndex}>
+                      <label>
+                        <input
+                          type="radio"
+                          name={`question${index}`}
+                          value={optionIndex + 1}
+                          checked={optionsMarked[index] === optionIndex + 1}
+                          onChange={() => handleOptionChange(index, optionIndex)}
+                        />
 
-                      {option.optionNumber}. {option.option}
-                    </label>
-                  </div>
-                ))}
+                        {option.optionNumber}. {option.option}
+                      </label>
+                    </div>
+                  ))}
 
+                </div>
               </div>
-            </div>
-          ))}
-          <button onClick={handleSubmit}>Submit</button>
-        </div>
-      )}
+            ))}
+            <button onClick={handleSubmit}>Submit</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
