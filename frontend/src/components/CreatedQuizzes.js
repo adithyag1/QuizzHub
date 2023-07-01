@@ -5,7 +5,8 @@ import { AuthContext } from '../context/AuthContext.js';
 
 function CreatedQuizzes(props) {
   const [quizList, setQuizList] = useState([]);
-  const {activeUsername}= useContext(AuthContext)
+  const [quizResultList, setQuizResultList] = useState([]);
+  const {activeUsername, activeUserId}= useContext(AuthContext);
   const isActiveUser= activeUsername===props.username;
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ function CreatedQuizzes(props) {
 
       const { quiz, message, creatorName } = response.data;
       if (quiz && quiz.length > 0) {
-        console.log('Creator name: ', creatorName);
+        //console.log('Creator name: ', creatorName);
         setQuizList(quiz);
       } else {
         console.log("message: ", message);
@@ -31,16 +32,37 @@ function CreatedQuizzes(props) {
     }
   };
 
+  const fetchTakenData= async()=>{
+    try {
+      const response = await axios.post("http://localhost:3001/quizusers/gettakenquizlist", {
+        userId: activeUserId,
+      });
+
+      const { quizResult, message } = response.data;
+      if (quizResult && quizResult.length > 0) {
+        setQuizResultList(quizResult);
+      } else {
+        console.log("message: ", message);
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
+
   const handleQuizClick = (quizId) => {
-    if(isActiveUser)
-    {
+    const isQuizTaken = quizResultList.some((quizResult) => quizResult.quizId === quizId);
+  
+    if (isQuizTaken) {
+      alert("Quiz already taken!");
+    } else {
+      if (!isActiveUser) {
         navigate(`/takequiz/${quizId}`);
+      } else {
+        navigate(`/viewquiz/${quizId}`);
+      }
     }
-    else{
-      navigate(`/viewquiz/${quizId}`);
-    }
-    
   };
+  
 
   return (
     <div>
@@ -69,4 +91,3 @@ function CreatedQuizzes(props) {
 }
 
 export default CreatedQuizzes;
-

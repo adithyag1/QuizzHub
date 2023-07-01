@@ -1,6 +1,6 @@
 import QuizzModel from "../models/Quizzes.js";
 import UserModel from "../models/Users.js"
-import express, { response } from 'express';
+import express from 'express';
 
 const router= express.Router();
 

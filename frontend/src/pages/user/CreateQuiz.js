@@ -24,14 +24,17 @@ function CreateQuiz() {
       const updatedQuestions = [...prevQuestions];
       const currentQuestionIndex = currentQuestion - 1;
       const currentQuestionObj = updatedQuestions[currentQuestionIndex];
+      //console.log('currentQuestioObj: ',currentQuestionObj); //working
       const updatedOptions = [
         ...currentQuestionObj.options,
         { optionNumber: currentQuestionObj.options.length + 1, option: '' },
       ];
+      // console.log('Updated Options: ', updatedOptions); //working
       updatedQuestions[currentQuestionIndex] = {
         ...currentQuestionObj,
         options: updatedOptions,
       };
+      // console.log('Updated Questions: ', updatedOptions); //working
       return updatedQuestions;
     });
   };
@@ -51,17 +54,20 @@ function CreateQuiz() {
         correctOption: 1,
       },
     ]);
+    // console.log('questions: ', questions)
   };
 
   const handleQuestionChange = (event) => {
     const { name, value } = event.target;
     const questionIndex = parseInt(name.split('-')[1]);
+    // console.log('question Index', questionIndex)
     setQuestions((prevQuestions) => {
       const updatedQuestions = [...prevQuestions];
       updatedQuestions[questionIndex] = {
         ...updatedQuestions[questionIndex],
         question: value,
       };
+      // console.log('Updated Questions: ', updatedQuestions)
       return updatedQuestions;
     });
   };
@@ -82,6 +88,7 @@ function CreateQuiz() {
       };
       return updatedQuestions;
     });
+    // console.log('questions on option change: ',questions)
   };
 
   const handleCorrectOptionChange = (event) => {
@@ -95,6 +102,7 @@ function CreateQuiz() {
       };
       return updatedQuestions;
     });
+    // console.log('questions: ', questions);
   };
   const sendData= async()=>{
     try{
