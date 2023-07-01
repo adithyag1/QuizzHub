@@ -12,6 +12,7 @@ function CreatedQuizzes(props) {
 
   useEffect(() => {
     fetchData();
+    fetchTakenData();
   }, []);
 
   const fetchData = async () => {

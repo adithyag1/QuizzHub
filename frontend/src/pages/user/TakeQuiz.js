@@ -97,6 +97,7 @@ function TakeQuiz() {
   return (
     <div>
       <Navbar />
+      <h2>Taken Quizzes</h2>
       {quizName !== '' && <h2>{quizName}</h2>}
       {questionList.length > 0 && (
         <div>

@@ -76,6 +76,14 @@
   justify-content: space-around;
 
 }
+
+.dashboard-navigate-element{
+  cursor: pointer;
+}
+.active{
+  border-bottom: 2px black solid;
+}
+
 .div1{
  margin: 10vh 5vw;
 
