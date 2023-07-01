@@ -8,13 +8,14 @@ router.post("/register", async (req, res) => {
   try {
     const user = await UserModel.findOne({ username });
     if (user) {
-      return res.json({ message: "User already exists" });
+      return res.json({status:0, message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new UserModel({ username, password: hashedPassword });
     await newUser.save();
-    res.json({ message: "User registered successfully!" });
+
+    res.json({ status: 1, username: newUser.username, userId: newUser.id, message: "User registered successfully!" });
   }
 
   catch (error) {
@@ -30,13 +31,13 @@ router.post("/login", async (req, res) => {
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
-        res.json({ username: user.username, userId: user.id, message: "Logged in successfully!" });
+        res.json({ status:1, username: user.username, userId: user.id, message: "Logged in successfully!" });
         //console.log('user: ', res.json)
       } else {
-        res.json({ username: null, message: "Incorrect password" });
+        res.json({ status:0, username: null, message: "Incorrect password" });
       }
     } else {
-      res.json({ username: null, message: "Invalid username" });
+      res.json({ status:2, username: null, message: "User doesn't exist" });
     }
   } catch (error) {
     console.error('Error querying the database:', error);

@@ -5,7 +5,6 @@ import Navbar from '../../components/Navbar.js';
 import { useNavigate } from 'react-router-dom';
 
 function CreateQuiz() {
-  const [currentOption, setCurrentOption] = useState(1);
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const {activeUserId}= useContext(AuthContext);
   const [loading, setLoading]= useState(false);
@@ -14,7 +13,7 @@ function CreateQuiz() {
     {
       questionNo: 1,
       question: '',
-      options: [{ optionNo: 1, option: '' }],
+      options: [{ optionNumber: 1, option: '' }],
       correctOption: 1,
     },
   ]);
@@ -27,7 +26,7 @@ function CreateQuiz() {
       const currentQuestionObj = updatedQuestions[currentQuestionIndex];
       const updatedOptions = [
         ...currentQuestionObj.options,
-        { optionNo: currentQuestionObj.options.length + 1, option: '' },
+        { optionNumber: currentQuestionObj.options.length + 1, option: '' },
       ];
       updatedQuestions[currentQuestionIndex] = {
         ...currentQuestionObj,
@@ -42,14 +41,13 @@ function CreateQuiz() {
   
 
   const handleAddQuestion = () => {
-    setCurrentOption(1);
     setCurrentQuestion((prevValue) => prevValue + 1);
     setQuestions((prevQuestions) => [
       ...prevQuestions,
       {
         questionNo: prevQuestions.length + 1,
         question: '',
-        options: [{ optionNo: 1, option: '' }],
+        options: [{ optionNumber: 1, option: '' }],
         correctOption: 1,
       },
     ]);
@@ -146,7 +144,7 @@ function CreateQuiz() {
           </div>
           {questionObj.options.map((optionObj, optionIndex) => (
             <div className='options-create-quiz' key={optionIndex}>
-              <div className='option-label'>{`Option ${optionObj.optionNo}:`}</div>
+              <div className='option-label'>{`Option ${optionObj.optionNumber}:`}</div>
               <input
                 type='text'
                 name={`option-${questionIndex}-${optionIndex}`}

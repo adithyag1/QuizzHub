@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext.js';
 
 function CreatedQuizzes(props) {
   const [quizList, setQuizList] = useState([]);
+  const {activeUsername}= useContext(AuthContext)
+  const isActiveUser= activeUsername===props.username;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,8 +19,9 @@ function CreatedQuizzes(props) {
         username: props.username,
       });
 
-      const { quiz, message } = response.data;
+      const { quiz, message, creatorName } = response.data;
       if (quiz && quiz.length > 0) {
+        console.log('Creator name: ', creatorName);
         setQuizList(quiz);
       } else {
         console.log("message: ", message);
@@ -28,7 +32,14 @@ function CreatedQuizzes(props) {
   };
 
   const handleQuizClick = (quizId) => {
-    navigate(`/viewquiz/${quizId}`);
+    if(isActiveUser)
+    {
+        navigate(`/takequiz/${quizId}`);
+    }
+    else{
+      navigate(`/viewquiz/${quizId}`);
+    }
+    
   };
 
   return (

@@ -20,7 +20,7 @@ function App() {
             <Route path='/' element={<Login />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/createquiz' element={<CreateQuiz />} />
-            <Route path='/takequiz' element={<TakeQuiz />} />
+            <Route path='/takequiz/:quizid' element={<TakeQuiz />} />
             <Route path='/searchquiz' element={<SearchQuiz />} />
             <Route path='/viewquiz/:quizid' element={<ViewQuiz/>}/>
           </Routes>

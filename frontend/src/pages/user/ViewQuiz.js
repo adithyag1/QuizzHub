@@ -36,16 +36,17 @@ function ViewQuiz() {
         <div>
           {questionList.map((question, index) => (
             <div key={index}>
-              <h3>Question {question.questionNo}:</h3>
+              <h3>Q{question.questionNo}. </h3>
               <p>{question.question}</p>
-              <ul>
+              <div>
                 {question.options.map((option, optionIndex) => (
-                  <li key={optionIndex}>
-                    {optionIndex+1}: {option.option}
-                    {optionIndex+1 === question.correctOption && <strong> (Correct Option)</strong>}
-                  </li>
+                  <div key={optionIndex}>
+                    {option.optionNumber}. {option.option}
+                    {option.optionNumber === question.correctOption && <strong> (Correct Option)</strong>}
+                  </div>
                 ))}
-              </ul>
+              </div>
+
             </div>
           ))}
         </div>
